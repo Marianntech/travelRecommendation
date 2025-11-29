@@ -1,0 +1,81 @@
+/* Basic CSS for the navigation bar */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0a1a2a;
+    color: white;
+    padding: 15px 30px;
+}
+nav .brand{
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: white;
+
+}
+nav img{
+    width: 40px;
+    vertical-align: middle;
+}
+nav .logo-group{
+    display: flex;
+    align-items: center;
+}
+nav ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+nav a:hover{
+    color: #4fd1c5;
+
+}
+/* Whole search bar container */
+.search-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: white;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  #searchInput {
+    border: none;
+    outline: none;
+    padding: 7px;
+    width: 220px;
+    border-radius: 5px;
+  }
+
+  #btnSearch,
+  #btnReset {
+    padding: 7px 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #dfe7e9;
+  }
+  
+  #btnSearch:hover,
+  #btnReset:hover {
+    background-color: #cbd5d9;
+  }
