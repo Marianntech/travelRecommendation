@@ -1,121 +1,221 @@
 /* Basic CSS for the navigation bar */
-
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0a1a2a;
-    color: white;
-    padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0a1a2a;
+  color: white;
+  padding: 15px 30px;
 }
 
 nav .brand{
-    font-size: 22px;
-    font-weight: bold;
-    margin-left: 10px;
-    color: #74C2EE;
+  font-size: 22px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: #74C2EE;
 }
 
 nav img{
-    width: 40px;
-    vertical-align: middle;
+  width: 40px;
+  vertical-align: middle;
 }
 
 nav .logo-group{
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 nav ul{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
 }
 
 nav a{
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 nav a:hover{
-    color: #76C7F3; 
-    transition: 0.2s;
+  color: #74C2EE; 
 }
 
 /* Whole search bar container */
 .search-group{
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: white;
+  padding: 6px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+#searchInput{
+  border: none;
+  outline: none;
+  padding: 7px;
+  width: 220px;
+  border-radius: 5px;
+}
+
+#btnSearch,
+#btnReset{
+  padding: 7px 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #dfe7e9;
+}
+
+#btnSearch:hover,
+#btnReset:hover{
+  background-color: #cbd5d9;
+}
+
+/* Hero section */
+.hero{
+  height: 89.9vh;
+  background-image: url("./images/beach_with_sun.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: flex-start;
+  padding: 12vh 60px 0;
+  position: relative;         
+}
+
+/* Dark-to-transparent overlay to keep text readable on the left side */
+.hero::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.50) 0%,
+    rgba(0,0,0,0.15) 50%,
+    rgba(0,0,0,0) 100%
+  );
+  z-index: 0;
+}
+
+.hero-left{
+  position: relative;
+  z-index: 2;             /* make sure text is above the overlay */
+  color: white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.55);
+  max-width: 480px;
+  margin-left: 8vw;
+}
+
+.hero-left h1{
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+.hero-left p{
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* Social bar below content */
+.social-strip {
+  position: absolute;
+  bottom: 40px;
+  left: calc(8vw + 60px); /* joondub hero-left marginiga */
+  display: flex;
+  gap: 16px;
+  z-index: 2;
+}
+
+/* Icon buttons styled as squares */
+.social-strip a {
+  width: 36px;
+  height: 36px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.social-strip a:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+}
+
+/* Primary CTA button */
+.cta{
+  padding: 12px 18px;
+  background-color: #74C2EE;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 20px;
+}
+
+.cta:hover{
+  background-color: #4ba8d3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE HERO (mobile / tablet) */
+@media (max-width: 900px){
+  .hero{
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 5px;
-    background-color: white;
-    padding: 6px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    padding: 40px 20px;
+    text-align: center;
   }
 
-  #searchInput{
-    border: none;
-    outline: none;
-    padding: 7px;
-    width: 220px;
-    border-radius: 5px;
+  .hero-left{
+    margin: 0;                  
+    max-width: 90%;
   }
 
-  #btnSearch,
-  #btnReset{
-    padding: 7px 14px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #dfe7e9;
-  }
-  
-  #btnSearch:hover,
-  #btnReset:hover{
-    background-color: #cbd5d9;
+  .hero-left h1{
+    font-size: 2rem;     
   }
 
-  .hero {
-    height: 89.9vh;
-    background-image: url("./images/beach.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: flex-start; 
-    align-items: flex-start;
-    padding-left: 60px;          
+  .hero-left p{
+    font-size: 1rem;
   }
 
-  .hero-text{
-    max-width: 480px;
-    color: white;
-    text-shadow: 0 0 10px rgba(0,0,0,0.55);
+  .social-strip{
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
   }
-  
-  .hero-text h1{
-    margin-bottom: 25px;
-    font-size: 3.2rem;
-    line-height: 1.2;
-    font-weight: 700;
-  }
-  
-  .hero-text p{
-    font-size: 1.2rem;
-    line-height: 1.5;
-  }
-  
-  
-  
-  
+
+  .social-strip a{
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }  
+}
