@@ -86,32 +86,94 @@ function setupSearch() {
   }
   
   function handleSearch(query) {
-    if (!travelData) {
-      console.log("Data not loaded yet, please try again.");
-      return;
+    const keyword = query.toLowerCase().trim();
+
+    if (!keyword) {
+        console.log("Empty search, nothing to do.");
+        return;
     }
-  
-    // BEACH / BEACHES
-    if (query.includes("beach")) {
-      console.log("Matching beaches:", travelData.beaches);
-      return;
+
+    // Beaches
+    if (keyword === "beach" || keyword === "beaches") {
+        console.log("Showing all beaches:", travelData.beaches);
+        displayResults(travelData.beaches);
+        return;
     }
-  
-    // TEMPLE / TEMPLES
-    if (query.includes("temple")) {
-      console.log("Matching temples:", travelData.temples);
-      return;
+
+    // Temples
+    if (keyword === "temple" || keyword === "temples") {
+        console.log("Showing all temples:", travelData.temples);
+        displayResults(travelData.temples);
+        return;
     }
-  
-    // (countries)
+
+    // Country keyword → show ALL countries
+    if (keyword === "country" || keyword === "countries") {
+        console.log("Showing all countries:", travelData.countries);
+        displayResults(travelData.countries);
+        return;
+    }
+
+    // Check if keyword matches a single country name
     const matchedCountries = travelData.countries.filter(country =>
-      country.name.toLowerCase().includes(query)
+        country.name.toLowerCase().includes(keyword)
     );
-  
+
     if (matchedCountries.length > 0) {
-      console.log("Matching countries:", matchedCountries);
-    } else {
-      console.log("No matches for keyword:", query);
+        console.log(`Matching specific country("${query}"):`, matchedCountries);
+        displayResults(matchedCountries);
+        return;
     }
+
+    //  No match fallback
+    console.log(`No matches for keyword: ${query}`);
+    displayResults([]); // empties UI
+}
+
+// ------------------ DISPLAY SEARCH RESULTS (TASK 8) ------------------
+
+function displayResults(items) {
+    const resultsContainer = document.getElementById("results");
+    if (!resultsContainer) return;
+  
+    // If there isin't any
+    if (!items || items.length === 0) {
+      resultsContainer.innerHTML = `
+        <div class="results-empty">
+          <p>No recommendations found for this search.</p>
+        </div>
+      `;
+      return;
+    }
+  
+    const cardsHtml = items.map((item) => {
+      const title = item.name;
+  
+      // beach/temple/city → imageUrl
+      // country → use first
+      const imageUrl =
+        item.imageUrl ||
+        (item.cities && item.cities[0] && item.cities[0].imageUrl) ||
+        "";
+  
+      const description =
+        item.description ||
+        (item.cities && item.cities[0] && item.cities[0].description) ||
+        "";
+  
+      return `
+        <div class="result-card">
+          ${imageUrl ? `<img src="${imageUrl}" alt="${title}">` : ""}
+          <div class="result-card-body">
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <button type="button" class="result-visit-btn">Visit</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  
+    resultsContainer.innerHTML = cardsHtml;
   }
+  
   

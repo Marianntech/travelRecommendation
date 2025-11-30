@@ -38,7 +38,7 @@
         "cities": [
           {
             "name": "Rio de Janeiro, Brazil",
-            "imageUrl": "./images/brazil.jpg",
+            "imageUrl": "./images/brazil_2.jpg",
             "description": "A lively city known for its stunning beaches, vibrant carnival celebrations, and iconic landmarks."
           },
           {
@@ -73,7 +73,7 @@
       {
         "id": 2,
         "name": "Copacabana Beach, Brazil",
-        "imageUrl": "./images/brazil_2.jpg",
+        "imageUrl": "./images/brazil_beach.jpg",
         "description": "A famous beach in Rio de Janeiro, Brazil, with a vibrant atmosphere and scenic views."
       }
     ]
