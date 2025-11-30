@@ -129,6 +129,12 @@ function setupSearch() {
     console.log(`No matches for keyword: ${query}`);
     displayResults([]); // empties UI
 }
+function scrollToResults() {
+  const section = document.getElementById("recommendations");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}
 
 // ------------------ DISPLAY SEARCH RESULTS (TASK 8) ------------------
 
@@ -143,6 +149,7 @@ function displayResults(items) {
           <p>No recommendations found for this search.</p>
         </div>
       `;
+      scrollToResults();
       return;
     }
   
@@ -174,6 +181,24 @@ function displayResults(items) {
     }).join("");
   
     resultsContainer.innerHTML = cardsHtml;
+    scrollToResults();
   }
+
+// Function to clear the search input and remove displayed results
+function clearResults() {
+    const input = document.getElementById("searchInput");
+    const resultsContainer = document.getElementById("results");
+
+    // Clear input field
+    if (input) {
+        input.value = "";
+    }
+
+    // Clear only the cards inside the results container
+    if (resultsContainer) {
+        resultsContainer.innerHTML = "";
+    }
+}
+document.getElementById("btnReset").addEventListener("click", clearResults);
   
   
