@@ -24,7 +24,7 @@ async function loadTravelData() {
 
 function setupContactForm() {
   const form = document.querySelector(".contact-form");
-  if (!form) return; // Home ja About lehel vormi pole -> lihtsalt välju
+  if (!form) return;
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -52,7 +52,66 @@ function setupContactForm() {
 document.addEventListener("DOMContentLoaded", () => {
   // Task 6: always try to load travel data on page load
   loadTravelData();
-
-  // Contact form handler töötab ainult contact.html lehel
+  // Contact form handler works only in contact.html page
   setupContactForm();
+  setupSearch();
 });
+// ------------------ SEARCH BAR HANDLING (TASK 7) ------------------
+
+function setupSearch() {
+    const searchInput = document.getElementById("searchInput");
+    const btnSearch = document.getElementById("btnSearch");
+    const btnReset = document.getElementById("btnReset");
+  
+    if (!searchInput || !btnSearch) return;
+  
+    btnSearch.addEventListener("click", () => {
+      const query = searchInput.value.trim().toLowerCase();
+  
+      if (!query) {
+        console.log("Empty search, nothing to do.");
+        return;
+      }
+  
+      handleSearch(query);
+    });
+  
+    if (btnReset) {
+      btnReset.addEventListener("click", () => {
+        searchInput.value = "";
+        console.log("Search cleared.");
+        // hiljem saame siia lisada ka tulemuste tühjendamise
+      });
+    }
+  }
+  
+  function handleSearch(query) {
+    if (!travelData) {
+      console.log("Data not loaded yet, please try again.");
+      return;
+    }
+  
+    // BEACH / BEACHES
+    if (query.includes("beach")) {
+      console.log("Matching beaches:", travelData.beaches);
+      return;
+    }
+  
+    // TEMPLE / TEMPLES
+    if (query.includes("temple")) {
+      console.log("Matching temples:", travelData.temples);
+      return;
+    }
+  
+    // (countries)
+    const matchedCountries = travelData.countries.filter(country =>
+      country.name.toLowerCase().includes(query)
+    );
+  
+    if (matchedCountries.length > 0) {
+      console.log("Matching countries:", matchedCountries);
+    } else {
+      console.log("No matches for keyword:", query);
+    }
+  }
+  
